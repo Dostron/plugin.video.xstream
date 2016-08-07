@@ -8,11 +8,11 @@ import xbmc
 import xbmcgui
 from resources.lib.config import cConfig
 from distutils.version import LooseVersion as V
-from resources.lib import common
-from resources.lib import download
+from resources.lib.common import addonPath
+from resources.lib.download import cDownload
 
 ## Installation path.
-ROOT_DIR = common.addonPath
+ROOT_DIR = addonPath
 TEMP_DIR = os.path.join(ROOT_DIR, "TEMP")
 XSTREAM_DIRNAME = os.path.basename(ROOT_DIR)
 
@@ -106,7 +106,7 @@ def getElementTreeFromString(sXML):
 def update(REMOTE_PATH):
     logger.info("xStream Update URL: " + REMOTE_PATH)
 
-    download.cDownload().download(REMOTE_PATH, LOCAL_FILE_NAME, False)
+    cDownload().download(REMOTE_PATH, LOCAL_FILE_NAME, False, "Updating xStream")
 
     updateFile = zipfile.ZipFile(os.path.join(TEMP_DIR, LOCAL_FILE_NAME))
 

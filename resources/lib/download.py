@@ -13,9 +13,9 @@ import sys
 
 class cDownload:
 
-    def __createProcessDialog(self):
+    def __createProcessDialog(self, downloadDialogTitle):
         oDialog = xbmcgui.DialogProgress()
-        oDialog.create('Download')
+        oDialog.create(downloadDialogTitle)
         self.__oDialog = oDialog
 
     def __createDownloadFilename(self, sTitle):
@@ -25,7 +25,7 @@ class cDownload:
         filename = filename.replace(' ','_')
         return filename
 
-    def download(self, url, sTitle, showDialog = True):
+    def download(self, url, sTitle, showDialog = True, downloadDialogTitle = 'Download'):
         sTitle = u'%s' % sTitle.decode('utf-8')
 
         self.__processIsCanceled = False
@@ -51,7 +51,7 @@ class cDownload:
 
                 if (sPath != ''):
                     sDownloadPath = xbmc.translatePath(sPath +  '%s' % (self.__sTitle, ))
-                    self.__prepareDownload(url, header, sDownloadPath)
+                    self.__prepareDownload(url, header, sDownloadPath, downloadDialogTitle)
 
         elif self.__sTitle != False:
             temp_dir = os.path.join(common.addonPath, "TEMP")
@@ -59,13 +59,13 @@ class cDownload:
             if not os.path.isdir(temp_dir):
                 os.makedirs(os.path.join(temp_dir))
 
-            self.__prepareDownload(url, header, os.path.join(temp_dir, sTitle))
+            self.__prepareDownload(url, header, os.path.join(temp_dir, sTitle), downloadDialogTitle)
 
 
-    def __prepareDownload(self, url, header, sDownloadPath):
+    def __prepareDownload(self, url, header, sDownloadPath, downloadDialogTitle):
         try:
             logger.info('download file: ' + str(url) + ' to ' + str(sDownloadPath))
-            self.__createProcessDialog()
+            self.__createProcessDialog(downloadDialogTitle)
             request = urllib2.Request(url, headers=header)
             self.__download(urllib2.urlopen(request), sDownloadPath)
         except Exception as e:
