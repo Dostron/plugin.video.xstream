@@ -88,7 +88,7 @@ class cHosterGui:
         return False
 
     def _addUserAgent(self, link):
-        if 'User-Agent' in link:
+        if 'User-Agent' or 'youtube' in link:
             return link
         if '|' in link:
             return link + '&' + self.userAgent
