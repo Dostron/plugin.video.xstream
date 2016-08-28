@@ -58,6 +58,7 @@ Mit xStream ist es möglich Serien und Filme unterschiedlichster Streaming-Platt
 | Cineplex       | cineplex.tv       | funktioniert           | 29.07.2016 |
 | Die Filme      | diefilme.net      | funktioniert           | 25.05.2016 |
 | DirectDownLoad | ddl.me            | funktioniert           | 09.04.2016 |
+| Dokustreamer   | dokustreamer.de   | funktioniert           | 28.08.2016 |
 | Filmmerstube   | filmmerstube.com  | funktioniert           | 21.08.2016 |
 | FilmPalast     | filmpalast.to     | funktioniert           | 09.04.2016 |
 | FilmeStreamz   | filme-streamz.com | funktioniert           | 29.07.2016 |
