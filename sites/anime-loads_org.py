@@ -264,13 +264,18 @@ def _decryptLink(enc, ud):
     hosters = []
     if 'content' in response:
         for entry in response['content']:
-            for item in entry['links']:
-                hoster ={}
-                hoster['link'] = item['link']
-                hoster['name'] = entry['hoster_name']
-                if 'part' in item:
-                    hoster['displayedName'] = '%s - Part %s' % (entry['hoster_name'],item['part'])
-                hosters.append(hoster)
+            hostEntry = entry
+            if type(entry) is not dict and 'links' in response['content'][entry]:
+                hostEntry = response['content'][entry]
+
+            if 'links' in hostEntry:
+                for item in hostEntry['links']:
+                    hoster ={}
+                    hoster['link'] = item['link']
+                    hoster['name'] = hostEntry['hoster_name']
+                    if 'part' in item:
+                        hoster['displayedName'] = '%s - Part %s' % (hostEntry['hoster_name'],item['part'])
+                    hosters.append(hoster)
 
     if len(hosters) > 0:
         hosters.append('getHosterUrl')
